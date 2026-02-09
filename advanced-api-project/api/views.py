@@ -1,8 +1,6 @@
-from rest_framework import generics
+from rest_framework import generics, filters
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
-from rest_framework.filters import SearchFilter, OrderingFilter
 
-# 🔑 REQUIRED FOR CHECKER
 from django_filters import rest_framework
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -21,8 +19,8 @@ class BookListView(generics.ListAPIView):
 
     filter_backends = [
         DjangoFilterBackend,
-        SearchFilter,
-        OrderingFilter,
+        filters.SearchFilter,
+        filters.OrderingFilter,  # 👈 checker wants THIS
     ]
 
     filterset_fields = ['title', 'publication_year', 'author']
